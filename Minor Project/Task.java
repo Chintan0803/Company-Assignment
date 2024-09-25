@@ -1,5 +1,3 @@
-
-
 import java.time.LocalTime;
 
 public class Task {
@@ -15,7 +13,7 @@ public class Task {
         this.priority = priority;
     }
 
-    // Getters
+    // Getter methods
     public String getDescription() {
         return description;
     }

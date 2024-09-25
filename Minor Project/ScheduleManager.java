@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +12,7 @@ public class ScheduleManager {
         conflictObserver = new TaskConflictObserver();
     }
 
-    // Singleton instance method
+    //Singleton instance method
     public static synchronized ScheduleManager getInstance() {
         if (instance == null) {
             instance = new ScheduleManager();
@@ -21,7 +20,7 @@ public class ScheduleManager {
         return instance;
     }
 
-    // Method to add a task
+    //add a task
     public void addTask(Scanner scanner) {
         System.out.print("Enter Task Description: ");
         String description = scanner.nextLine();
@@ -34,7 +33,7 @@ public class ScheduleManager {
 
         Task newTask = TaskFactory.createTask(description, startTime, endTime, priority);
         if (conflictObserver.hasConflict(newTask, tasks)) {
-            System.out.println("Error: Task conflicts with existing task.");
+            System.out.println("Error: Task conflicts with existing task. " + tasks);
         } else {
             tasks.add(newTask);
             LoggerUtility.log("Task added successfully: " + newTask);
@@ -42,7 +41,7 @@ public class ScheduleManager {
         }
     }
 
-    // Method to remove a task
+    //remove a task
     public void removeTask(Scanner scanner) {
         System.out.print("Enter Task Description to Remove: ");
         String description = scanner.nextLine();
@@ -52,15 +51,15 @@ public class ScheduleManager {
                 .orElse(null);
 
         if (taskToRemove == null) {
-            System.out.println("Error: Task not found.");
+            System.out.println("Error: Task not found.check the description again!");
         } else {
             tasks.remove(taskToRemove);
             LoggerUtility.log("Task removed: " + taskToRemove);
-            System.out.println("Task removed successfully.");
+            System.out.println("Task: " + taskToRemove.getDescription() + " removed successfully.");
         }
     }
 
-    // Method to view all tasks sorted by start time
+    //view all tasks sorted by start time...
     public void viewTasks() {
         if (tasks.isEmpty()) {
             System.out.println("No tasks scheduled for the day.");
